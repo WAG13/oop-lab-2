@@ -1,5 +1,5 @@
-Для работы с матрицами используется Armadillo library.
-Что я делал для запуска в Visual Studio:
-Добавил armadillo_bits/lib_win64.lib файлы по этому туториалу https://www.tutorialspoint.com/how-to-include-libraries-in-visual-studio-2012
-Скинул все dll из armadillo_bits/lib_win64 в Windows/System32
-Настроил чтоб система билдила под x64. https://stackoverflow.com/questions/3563756/fatal-error-lnk1112-module-machine-type-x64-conflicts-with-target-machine-typ
+To work with matrixes used external Armadillo library.
+What I did to run it in Visual Studio:
+Added armadillo_bits/lib_win64.lib files according to tutorial https://www.tutorialspoint.com/how-to-include-libraries-in-visual-studio-2012
+Copied all dll from armadillo_bits/lib_win64 to Windows/System32
+Configured build for x64 according to tutorial https://stackoverflow.com/questions/3563756/fatal-error-lnk1112-module-machine-type-x64-conflicts-with-target-machine-typ
