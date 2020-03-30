@@ -15,17 +15,35 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    main.cpp \
+SOURCES += main.cpp \
+    Approximation/Approximator.cpp \
+    Approximation/LinearApproximator.cpp \
+    Approximation/LogarithmicApproximator.cpp \
+    Approximation/NLogNApproximator.cpp \
+    Approximation/QuadraticApproximator.cpp \
     mainwindow.cpp
 
-HEADERS += \
-    mainwindow.h
+HEADERS += mainwindow.h \
+    Approximation/ApproximationData.h \
+    Approximation/Approximator.h \
+    Approximation/LinearApproximator.h \
+    Approximation/LogarithmicApproximator.h \
+    Approximation/NLogNApproximator.h \
+    Approximation/Point.h \
+    Approximation/QuadraticApproximator.h
 
-FORMS += \
-    mainwindow.ui
+FORMS += mainwindow.ui
+
+INCLUDEPATH += .\Armadillo\include
+
+LIBS += -L"$$PWD/Armadillo/examples/lib_win64" \
+    -llapack_win64_MT \
+    -lblas_win64_MT
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    Approximation/README
