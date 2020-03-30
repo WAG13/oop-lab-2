@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Approximator.h"
-#include "armadillo.h"
+#include "armadillo"
 
 using namespace std;
 using namespace arma;
 
 //approximation for function y = a*x*logx
-class XLogXApproximator
+class NLogNApproximator: public Approximator
 {
 private:
 	double standartDeviation(Point point, vector<double> koefs);
@@ -16,7 +16,7 @@ private:
 public:
 	//returns koeficient {a} and standart deviation
 	virtual ApproximationData approximate(vector<Point> points);
-	XLogXApproximator();
-	~XLogXApproximator();
+    NLogNApproximator();
+    ~NLogNApproximator();
 };
 

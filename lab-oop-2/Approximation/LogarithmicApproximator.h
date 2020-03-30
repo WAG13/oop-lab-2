@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Approximator.h"
-#include "armadillo.h"
+#include "armadillo"
 
 using namespace std;
 using namespace arma;
 
 //represents approximation for y = alogx+b.
-class LogarithmicApproximator
+class LogarithmicApproximator:public Approximator
 {
 private:
 	double standartDeviation(Point point, vector<double> koefs);

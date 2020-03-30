@@ -1,5 +1,0 @@
-To work with matrixes used external Armadillo library.
-What I did to run it in Visual Studio:
-Added armadillo_bits/lib_win64.lib files according to tutorial https://www.tutorialspoint.com/how-to-include-libraries-in-visual-studio-2012
-Copied all dll from armadillo_bits/lib_win64 to Windows/System32
-Configured build for x64 according to tutorial https://stackoverflow.com/questions/3563756/fatal-error-lnk1112-module-machine-type-x64-conflicts-with-target-machine-typ

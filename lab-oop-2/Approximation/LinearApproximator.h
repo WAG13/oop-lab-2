@@ -1,6 +1,6 @@
 #pragma once
 #include "Approximator.h"
-#include "armadillo.h"
+#include "armadillo"
 
 using namespace std;
 using namespace arma;
