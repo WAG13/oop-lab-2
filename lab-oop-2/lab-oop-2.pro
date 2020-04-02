@@ -30,15 +30,24 @@ HEADERS += mainwindow.h \
     Approximation/LogarithmicApproximator.h \
     Approximation/NLogNApproximator.h \
     Approximation/Point.h \
-    Approximation/QuadraticApproximator.h
+    Approximation/QuadraticApproximator.h \
+    SortingAlgorithms/GappingStrategy.h \
+    SortingAlgorithms/PivotingStrategy.h \
+    SortingAlgorithms/Random.h \
+    SortingAlgorithms/SortingAlgorithms.h
 
 FORMS += mainwindow.ui
 
-INCLUDEPATH += .\Armadillo\include
+INCLUDEPATH += ./Armadillo/include
 
-LIBS += -L"$$PWD/Armadillo/examples/lib_win64" \
-    -llapack_win64_MT \
-    -lblas_win64_MT
+win64 {
+    LIBS += -L"$$PWD/Armadillo/examples/lib_win64" \
+        -llapack_win64_MT \
+        -lblas_win64_MT
+}
+unix {
+    LIBS += -L"$$PWD/Armadillo/include" -llapack -lopenblas
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -46,4 +55,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Approximation/README
+    Approximation/README \
+    SortingAlgorithms/README.md
