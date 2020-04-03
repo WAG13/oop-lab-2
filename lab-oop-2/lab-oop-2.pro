@@ -40,14 +40,8 @@ FORMS += mainwindow.ui
 
 INCLUDEPATH += ./Armadillo/include
 
-win64 {
-    LIBS += -L"$$PWD/Armadillo/examples/lib_win64" \
-        -llapack_win64_MT \
-        -lblas_win64_MT
-}
-unix {
-    LIBS += -L"$$PWD/Armadillo/include" -llapack -lopenblas
-}
+win64: LIBS += -L"$$PWD/Armadillo/examples/lib_win64" -llapack_win64_MT -lblas_win64_MT
+unix: LIBS += -L"$$PWD/Armadillo/include" -llapack -lopenblas
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -57,3 +51,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     Approximation/README \
     SortingAlgorithms/README.md
+
+
+
