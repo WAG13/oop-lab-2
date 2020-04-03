@@ -5,7 +5,7 @@ using namespace std;
 #include <QDebug>
 
 
-bool MemoryTrackerHook::trackMemory = true;
+bool MemoryTrackerHook::trackMemory = false;
 size_t MemoryTrackerHook::bytesUsed = 0;
 
 

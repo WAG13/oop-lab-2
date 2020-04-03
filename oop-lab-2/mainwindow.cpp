@@ -1,9 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "qcustomplot.h"
+#include "QDebug"
 #include "Diagnostics/MemoryTrackerHook.h"
+#include "SortingAlgorithms/Random.h"
 #include "SortingAlgorithms/SortingAlgorithms.h"
 #include <vector>
+#include <memory>
+
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,6 +30,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    /* Test */
+    /* TODO: remove */
+    uint size = uint(getRandomInt(60, 100000));
+    std::vector<int> ints = getRandomVector(0, 1000000, size);
+    std::unique_ptr<Sorting<int>> sortAlgorithm = std::make_unique<MergeSort<int>>();
+
+    qDebug() << "Sorting" << size << "ints" << endl;
+    MemoryTrackerHook::trackMemory = true;
+    MemoryTrackerHook::bytesUsed = 0;
+
+    sortAlgorithm->sort(ints, 0, ints.size() - 1);
+
+    MemoryTrackerHook::trackMemory = false;
+    qDebug() << "Bytes used:" << MemoryTrackerHook::bytesUsed << endl;
+
+
+
     /**/
     // generate some data:
     QVector<double> x(101), y(101);

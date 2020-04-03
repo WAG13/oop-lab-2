@@ -242,11 +242,12 @@ private:
 	GappingStrategy* gapping_strategy;
 
 public:
+    ShellSort()
+        : gapping_strategy(new ShellStrategy()) {
+    }
+
 	ShellSort(GappingStrategy* _gapping_strategy)
-		: gapping_strategy(_gapping_strategy) {
-		if (!_gapping_strategy) {
-			gapping_strategy = new ShellStrategy();
-		}
+        : gapping_strategy(_gapping_strategy) {
 	}
 
 	ShellSort(const ShellSort<T>* source) : Sorting<T>(source) {
