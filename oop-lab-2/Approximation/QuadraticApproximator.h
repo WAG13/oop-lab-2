@@ -12,8 +12,6 @@ protected:
 	mat getB(vector<Point> points);
     Function *getApproximationFunction(vector<double> koefs);
 public:
-	//returns koeficients {a,b,c} and standart deviation
-    ApproximationData approximate(vector<Point> points);
 	QuadraticApproximator();
 	~QuadraticApproximator();
 };

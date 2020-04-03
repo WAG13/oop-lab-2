@@ -13,8 +13,6 @@ protected:
 	mat getB(vector<Point> points);
     Function *getApproximationFunction(vector<double> koefs);
 public:
-	//returns koeficients {a,b} and standart deviation
-    ApproximationData approximate(vector<Point> points);
 	LogarithmicApproximator();
 	~LogarithmicApproximator();
 };

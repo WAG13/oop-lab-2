@@ -17,6 +17,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     Approximation/Approximator.cpp \
+    Approximation/Functions/Function.cpp \
+    Approximation/Functions/LinearFunction.cpp \
+    Approximation/Functions/LogarithmicFunction.cpp \
+    Approximation/Functions/QuadraticFunction.cpp \
+    Approximation/Functions/XLogXFunction.cpp \
     Approximation/LinearApproximator.cpp \
     Approximation/LogarithmicApproximator.cpp \
     Approximation/XLogXApproximator.cpp \
@@ -27,6 +32,11 @@ SOURCES += main.cpp \
 
 
 HEADERS += mainwindow.h \
+    Approximation/Functions/Function.h \
+    Approximation/Functions/LinearFunction.h \
+    Approximation/Functions/LogarithmicFunction.h \
+    Approximation/Functions/QuadraticFunction.h \
+    Approximation/Functions/XLogXFunction.h \
     qcustomplot.h \
     Approximation/ApproximationData.h \
     Approximation/Approximator.h \
