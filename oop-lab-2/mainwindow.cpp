@@ -36,15 +36,16 @@ void MainWindow::on_pushButton_clicked()
     std::vector<int> ints = getRandomVector(0, 1000000, size);
     std::unique_ptr<Sorting<int>> sortAlgorithm = std::make_unique<MergeSort<int>>();
 
+    MemoryTrackerHook& memoryTracker = MemoryTrackerHook::getInstance();
+
+    memoryTracker.reset();
+    memoryTracker.activate();
+
     qDebug() << "Sorting" << size << "ints" << endl;
-    MemoryTrackerHook::trackMemory = true;
-    MemoryTrackerHook::currentBytesUsed = 0;
-    MemoryTrackerHook::maxBytesUsed = 0;
-
     sortAlgorithm->sort(ints, 0, ints.size() - 1);
+    qDebug() << "Max bytes used:" << memoryTracker.getMaxBytesUsed() << endl;
 
-    MemoryTrackerHook::trackMemory = false;
-    qDebug() << "Max bytes used:" << MemoryTrackerHook::maxBytesUsed << endl;
+    memoryTracker.deactivate();
 
 
 

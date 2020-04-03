@@ -27,6 +27,7 @@ SOURCES += main.cpp \
     Approximation/XLogXApproximator.cpp \
     Approximation/QuadraticApproximator.cpp \
     Diagnostics/MemoryTrackerHook.cpp \
+    Diagnostics/TestBuilder.cpp \
     mainwindow.cpp \
     qcustomplot.cpp
 
@@ -37,6 +38,7 @@ HEADERS += mainwindow.h \
     Approximation/Functions/LogarithmicFunction.h \
     Approximation/Functions/QuadraticFunction.h \
     Approximation/Functions/XLogXFunction.h \
+    Diagnostics/TestBuilder.h \
     qcustomplot.h \
     Approximation/ApproximationData.h \
     Approximation/Approximator.h \
