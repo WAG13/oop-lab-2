@@ -5,6 +5,7 @@
 #include "Diagnostics/TestBuilder.h"
 #include "Diagnostics/DataGenerator.h"
 #include "Diagnostics/MemoryTrackerHook.h"
+#include "Diagnostics/TimeTrackerHook.h"
 #include "SortingAlgorithms/SortingAlgorithms.h"
 #include <vector>
 #include <memory>
@@ -34,18 +35,22 @@ void MainWindow::on_pushButton_clicked()
     /* Test */
     /* TODO: remove */
 
-    MemoryTrackerHook* memoryTracker = new MemoryTrackerHook();
     Sorting<int>* sortAlgorithm = new MergeSort<int>();
     DataGenerator<int>* dataGen = new RandomDataGenerator<int>();
+
+    MemoryTrackerHook* memoryTracker = new MemoryTrackerHook();
+    TimeTrackerHook* timeTracker = new TimeTrackerHook();
 
     TestBuilder test;
     test.setSortAlgorithm(sortAlgorithm)
             //Add parameters
+            ->setStartElementCount(100)
             ->setStepSize(10000)
             ->setStepCount(5)
             ->setDataGenerator(dataGen)
             //Add hooks
             ->addDiagnosticsHook(memoryTracker)
+            ->addDiagnosticsHook(timeTracker)
             //Run
             ->run();
 
@@ -55,10 +60,18 @@ void MainWindow::on_pushButton_clicked()
         qDebug() << p.x << " elements: " << p.y << " bytes used" << endl;
     }
 
+    vector<Point> durations = timeTracker->getDurationsSeconds();
+    for(const Point& p : durations) {
+        qDebug() << p.x << " elements: " << p.y << " seconds" << endl;
+    }
+
 
     delete memoryTracker;
     delete sortAlgorithm;
     delete dataGen;
+
+
+
 
 
     /**/

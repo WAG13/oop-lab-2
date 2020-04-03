@@ -29,6 +29,7 @@ SOURCES += main.cpp \
     Diagnostics/MemoryTracker.cpp \
     Diagnostics/MemoryTrackerHook.cpp \
     Diagnostics/TestBuilder.cpp \
+    Diagnostics/TimeTrackerHook.cpp \
     mainwindow.cpp \
     qcustomplot.cpp
 
@@ -44,6 +45,7 @@ HEADERS += mainwindow.h \
     Diagnostics/MemoryTrackerHook.h \
     Diagnostics/Random.h \
     Diagnostics/TestBuilder.h \
+    Diagnostics/TimeTrackerHook.h \
     qcustomplot.h \
     Approximation/ApproximationData.h \
     Approximation/Approximator.h \

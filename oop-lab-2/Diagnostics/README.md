@@ -12,6 +12,7 @@ Example usage:
     TestBuilder test;
     test.setSortAlgorithm(sortAlgorithm)
             //Add parameters
+            ->setStartElementCount(100);
             ->setStepSize(10000)
             ->setStepCount(5)
             ->setDataGenerator(dataGen)
