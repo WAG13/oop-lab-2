@@ -1,21 +1,20 @@
 #pragma once
 
 #include "Approximator.h"
-#include "armadillo"
+#include "Functions/LogarithmicFunction.h"
 
 using namespace std;
-using namespace arma;
 
 //represents approximation for y = alogx+b.
 class LogarithmicApproximator:public Approximator
 {
-private:
-	double standartDeviation(Point point, vector<double> koefs);
+protected:
 	mat getA(vector<Point> points);
 	mat getB(vector<Point> points);
+    Function *getApproximationFunction(vector<double> koefs);
 public:
 	//returns koeficients {a,b} and standart deviation
-	virtual ApproximationData approximate(vector<Point> points);
+    ApproximationData approximate(vector<Point> points);
 	LogarithmicApproximator();
 	~LogarithmicApproximator();
 };

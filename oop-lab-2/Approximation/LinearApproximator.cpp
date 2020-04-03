@@ -1,13 +1,5 @@
 #include "LinearApproximator.h"
 
-
-
-double LinearApproximator::standartDeviation(Point point, vector<double> koefs)
-{
-	double calculatedY = koefs[0] * point.x + koefs[1];
-	return (point.y - calculatedY)*(point.y - calculatedY);
-}
-
 mat LinearApproximator::getA(vector<Point> points)
 {
 	mat A(2, 2, fill::zeros);
@@ -42,29 +34,12 @@ mat LinearApproximator::getB(vector<Point> points)
 		B(1) += point.y;
 	}
 
-	return B;
+    return B;
 }
 
-ApproximationData LinearApproximator::approximate(vector<Point> points)
+Function *LinearApproximator::getApproximationFunction(vector<double> koefs)
 {
-	//AX=B, X=(A^-1)*B
-	mat A = getA(points);
-	vec B = getB(points);
-
-	vec X = solve(A, B);
-
-	ApproximationData result;
-	for (int i = 0; i < X.n_rows; i++) {
-		result.funcKoefs.push_back(X(i));
-	}
-
-	for (Point point : points) {
-		double stDev = standartDeviation(point, result.funcKoefs);
-		result.standartDeviation += standartDeviation(point, result.funcKoefs);
-	}
-
-
-	return result;
+    return new LinearFunction(koefs);
 }
 
 LinearApproximator::LinearApproximator()
