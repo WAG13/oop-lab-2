@@ -1,5 +1,7 @@
 #include "XLogXFunction.h"
 
+#include <cmath>
+
 Point XLogXFunction::getPoint(double x)
 {
     return Point(x, koefs[0] * x * log2(x) + koefs[1]);

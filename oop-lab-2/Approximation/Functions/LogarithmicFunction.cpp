@@ -1,5 +1,7 @@
 #include "LogarithmicFunction.h"
 
+#include <cmath>
+
 Point LogarithmicFunction::getPoint(double x)
 {
     return Point(x, koefs[0] * log2(x) + koefs[1]);
