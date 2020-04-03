@@ -70,10 +70,10 @@ void MemoryTracker::trackDelete(void *ptr, size_t size) {
     free(ptr);
 }
 
-void operator delete(void* ptr, size_t size) {
+void operator delete(void* ptr, size_t size) noexcept {
     MemoryTracker::trackDelete(ptr, size);
 }
 
-void operator delete[](void* ptr, size_t size) {
+void operator delete[](void* ptr, size_t size) noexcept {
     MemoryTracker::trackDelete(ptr, size);
 }
