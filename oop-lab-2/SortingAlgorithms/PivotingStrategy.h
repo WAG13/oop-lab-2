@@ -1,6 +1,8 @@
 #pragma once
-#include "Random.h"
+
+#include <Diagnostics/Random.h>
 #include <vector>
+
 using std::vector;
 
 template <typename T>
@@ -44,7 +46,7 @@ public:
 template <typename T>
 class RandomPivot : public PivotingStrategy<T> {
 	T getPivot(vector<T> const &sample, int left, int right) override {
-		return sample[(unsigned)getRandomInt((int)left, (int)right)];
+        return sample[Random::getRandomInt<size_t>(left, right)];
 	}
 
 	~RandomPivot() {}

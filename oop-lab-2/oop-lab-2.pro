@@ -38,6 +38,7 @@ HEADERS += mainwindow.h \
     Approximation/Functions/LogarithmicFunction.h \
     Approximation/Functions/QuadraticFunction.h \
     Approximation/Functions/XLogXFunction.h \
+    Diagnostics/Random.h \
     Diagnostics/TestBuilder.h \
     qcustomplot.h \
     Approximation/ApproximationData.h \
@@ -50,7 +51,6 @@ HEADERS += mainwindow.h \
     Diagnostics/MemoryTrackerHook.h \
     SortingAlgorithms/GappingStrategy.h \
     SortingAlgorithms/PivotingStrategy.h \
-    SortingAlgorithms/Random.h \
     SortingAlgorithms/SortingAlgorithms.h
 
 FORMS += mainwindow.ui

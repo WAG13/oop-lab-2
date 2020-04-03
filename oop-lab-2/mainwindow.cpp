@@ -3,7 +3,7 @@
 #include "qcustomplot.h"
 #include "QDebug"
 #include "Diagnostics/MemoryTrackerHook.h"
-#include "SortingAlgorithms/Random.h"
+#include "Diagnostics/Random.h"
 #include "SortingAlgorithms/SortingAlgorithms.h"
 #include <vector>
 #include <memory>
@@ -32,8 +32,8 @@ void MainWindow::on_pushButton_clicked()
 {
     /* Test */
     /* TODO: remove */
-    uint size = uint(getRandomInt(60, 100000));
-    std::vector<int> ints = getRandomVector(0, 1000000, size);
+    size_t size = Random::getRandomInt<size_t>(60, 100000);
+    std::vector<int> ints = Random::getRandomVector<int>(0, 1000000, size);
     std::unique_ptr<Sorting<int>> sortAlgorithm = std::make_unique<MergeSort<int>>();
 
     MemoryTrackerHook& memoryTracker = MemoryTrackerHook::getInstance();
