@@ -1,47 +1,27 @@
-#pragma once
+#ifndef MEMORYTRACKERHOOK_H
+#define MEMORYTRACKERHOOK_H
 
-#include <cstdlib>
-#include <cstddef>
-#include <stdexcept>
+#include "Approximation/Point.h"
+#include "TestBuilder.h"
+#include "MemoryTracker.h"
+#include <vector>
+#include <memory>
 
-using namespace std;
-
-class MemoryTrackerHook {
+class MemoryTrackerHook : public TestBuilder::DiagnosticsHook
+{
 public:
-    static MemoryTrackerHook& getInstance();
+    MemoryTrackerHook();
+    ~MemoryTrackerHook() override;
 
-    //Singleton
-    MemoryTrackerHook(const MemoryTrackerHook&) = delete;
-    void operator=(const MemoryTrackerHook&) = delete;
-
-    void activate();
-    void deactivate();
-    void reset();
-    size_t getCurrentBytesUsed();
-    size_t getMaxBytesUsed();
+   vector<Point> getBytesUsed();
 
 
 private:
-    //Singleton
-    MemoryTrackerHook() {}
+    void beforeRunStart(const std::vector<int>& data) override;
+    void afterRunEnd(const std::vector<int>& data) override;
 
-    static bool trackMemory;
-    static size_t currentBytesUsed;
-    static size_t maxBytesUsed;
-
-
-    static void* trackNew(size_t size);
-    static void trackDelete(void* ptr, size_t size);
-
-    friend void* operator new(size_t size);
-    friend void* operator new[](size_t size);
-
-    friend void operator delete(void* ptr, size_t size);
-    friend void operator delete[](void* ptr, size_t size);
+    vector<Point> bytesUsedVector;
+    shared_ptr<MemoryTracker> memoryTracker;
 };
 
-void* operator new(size_t size);
-void* operator new[](size_t size);
-
-void operator delete(void* ptr, size_t size);
-void operator delete[](void* ptr, size_t size);
+#endif // MEMORYTRACKERHOOK_H

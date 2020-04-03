@@ -2,8 +2,9 @@
 #include "ui_mainwindow.h"
 #include "qcustomplot.h"
 #include "QDebug"
+#include "Diagnostics/TestBuilder.h"
+#include "Diagnostics/DataGenerator.h"
 #include "Diagnostics/MemoryTrackerHook.h"
-#include "Diagnostics/Random.h"
 #include "SortingAlgorithms/SortingAlgorithms.h"
 #include <vector>
 #include <memory>
@@ -32,21 +33,32 @@ void MainWindow::on_pushButton_clicked()
 {
     /* Test */
     /* TODO: remove */
-    size_t size = Random::getRandomInt<size_t>(60, 100000);
-    std::vector<int> ints = Random::getRandomVector<int>(0, 1000000, size);
-    std::unique_ptr<Sorting<int>> sortAlgorithm = std::make_unique<MergeSort<int>>();
 
-    MemoryTrackerHook& memoryTracker = MemoryTrackerHook::getInstance();
+    MemoryTrackerHook* memoryTracker = new MemoryTrackerHook();
+    Sorting<int>* sortAlgorithm = new MergeSort<int>();
+    DataGenerator<int>* dataGen = new RandomDataGenerator<int>();
 
-    memoryTracker.reset();
-    memoryTracker.activate();
+    TestBuilder test;
+    test.setSortAlgorithm(sortAlgorithm)
+            //Add parameters
+            ->setStepSize(10000)
+            ->setStepCount(5)
+            ->setDataGenerator(dataGen)
+            //Add hooks
+            ->addDiagnosticsHook(memoryTracker)
+            //Run
+            ->run();
 
-    qDebug() << "Sorting" << size << "ints" << endl;
-    sortAlgorithm->sort(ints, 0, ints.size() - 1);
-    qDebug() << "Max bytes used:" << memoryTracker.getMaxBytesUsed() << endl;
+    //Get results of hooks
+    vector<Point> bytesUsed = memoryTracker->getBytesUsed();
+    for(const Point& p : bytesUsed) {
+        qDebug() << p.x << " elements: " << p.y << " bytes used" << endl;
+    }
 
-    memoryTracker.deactivate();
 
+    delete memoryTracker;
+    delete sortAlgorithm;
+    delete dataGen;
 
 
     /**/

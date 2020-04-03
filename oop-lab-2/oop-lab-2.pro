@@ -26,6 +26,7 @@ SOURCES += main.cpp \
     Approximation/LogarithmicApproximator.cpp \
     Approximation/XLogXApproximator.cpp \
     Approximation/QuadraticApproximator.cpp \
+    Diagnostics/MemoryTracker.cpp \
     Diagnostics/MemoryTrackerHook.cpp \
     Diagnostics/TestBuilder.cpp \
     mainwindow.cpp \
@@ -38,6 +39,9 @@ HEADERS += mainwindow.h \
     Approximation/Functions/LogarithmicFunction.h \
     Approximation/Functions/QuadraticFunction.h \
     Approximation/Functions/XLogXFunction.h \
+    Diagnostics/DataGenerator.h \
+    Diagnostics/MemoryTracker.h \
+    Diagnostics/MemoryTrackerHook.h \
     Diagnostics/Random.h \
     Diagnostics/TestBuilder.h \
     qcustomplot.h \
@@ -48,7 +52,6 @@ HEADERS += mainwindow.h \
     Approximation/XLogXApproximator.h \
     Approximation/Point.h \
     Approximation/QuadraticApproximator.h \
-    Diagnostics/MemoryTrackerHook.h \
     SortingAlgorithms/GappingStrategy.h \
     SortingAlgorithms/PivotingStrategy.h \
     SortingAlgorithms/SortingAlgorithms.h

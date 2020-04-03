@@ -5,7 +5,7 @@
 #include "Approximation/LogarithmicApproximator.h"
 #include "Approximation/ApproximationData.h"
 
-#include "Diagnostics/MemoryTrackerHook.h"
+#include "Diagnostics/MemoryTracker.h"
 
 #include <QApplication>
 #include <QDebug>
