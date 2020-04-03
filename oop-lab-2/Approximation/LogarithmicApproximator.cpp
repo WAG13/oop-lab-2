@@ -6,13 +6,6 @@ LogarithmicApproximator::LogarithmicApproximator()
 {
 }
 
-
-double LogarithmicApproximator::standartDeviation(Point point, vector<double> koefs)
-{
-	double calculatedY = koefs[0] * log2(point.x) + koefs[1];
-	return (point.y - calculatedY)*(point.y - calculatedY);
-}
-
 mat LogarithmicApproximator::getA(vector<Point> points)
 {
 	mat A(2, 2, fill::zeros);
@@ -46,28 +39,12 @@ mat LogarithmicApproximator::getB(vector<Point> points)
 		B(1) += point.y*log2(point.x);
 	}
 
-	return B;
+    return B;
 }
 
-ApproximationData LogarithmicApproximator::approximate(vector<Point> points)
+Function *LogarithmicApproximator::getApproximationFunction(vector<double> koefs)
 {
-	//AX=B, X=(A^-1)*B
-	mat A = getA(points);
-	vec B = getB(points);
-
-	vec X = solve(A, B);
-
-	ApproximationData result;
-	for (int i = 0; i < X.n_rows; i++) {
-		result.funcKoefs.push_back(X(i));
-	}
-
-	for (Point point : points) {
-		double stDev = standartDeviation(point, result.funcKoefs);
-		result.standartDeviation += standartDeviation(point, result.funcKoefs);
-	}
-
-	return result;
+return new LogarithmicFunction(koefs);
 }
 
 LogarithmicApproximator::~LogarithmicApproximator()
