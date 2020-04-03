@@ -47,7 +47,7 @@ win32{
     LIBS += -L"$$PWD/Armadillo/examples/lib_win64" -llapack_win64_MT -lblas_win64_MT
 }
 unix{
- LIBS += -L"$$PWD/Armadillo/include" -llapack -lopenblas
+    LIBS += -L"$$PWD/Armadillo/include" -llapack -lopenblas
 }
 
 # Default rules for deployment.
