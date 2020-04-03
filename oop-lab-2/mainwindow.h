@@ -3,6 +3,21 @@
 
 #include <QMainWindow>
 #include "qcustomplot.h"
+#include "QDebug"
+#include "facade.h"
+
+#include "Approximation/Point.h"
+#include "Approximation/LogarithmicApproximator.h"
+#include "Approximation/ApproximationData.h"
+
+#include "Diagnostics/MemoryTracker.h"
+#include "Diagnostics/MemoryTrackerHook.h"
+#include "Diagnostics/TestBuilder.h"
+#include "Diagnostics/DataGenerator.h"
+#include "Diagnostics/TimeTrackerHook.h"
+#include "SortingAlgorithms/SortingAlgorithms.h"
+#include <vector>
+#include <memory>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,9 +36,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    void clearPlot(QCustomPlot *plot);
-    void preparePlot(QCustomPlot *plot, QString x_axis_name, QString y_axis_name);
-    void setPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=0);
-    void addAproximation(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=1);
+    Facade facade;
 };
 #endif // MAINWINDOW_H

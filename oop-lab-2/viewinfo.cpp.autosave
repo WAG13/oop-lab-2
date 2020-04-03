@@ -1,0 +1,124 @@
+#include "viewinfo.h"
+
+ViewInfo::ViewInfo(QCustomPlot *plot, QString x_axis_name, QString y_axis_name):plot(plot) {
+    preparePlot(x_axis_name, y_axis_name);
+}
+
+void ViewInfo::addInfo(int sort_type, int elem_numb, int step, int sort_numb){
+    this->elem_numb = elem_numb;
+    this->step = step;
+    this->sort_numb = sort_numb;
+    setSorting(sort_type);
+    
+    runSorting();
+    Aproximation();
+}
+
+void ViewInfo::setSorting(int index){
+    switch ( index )
+          {
+             case 0:
+                sortAlgorithm = new BubbleSort <int>();
+                break;
+             case 1:
+                sortAlgorithm = new SelectionSort <int>();
+                break;
+             case 2:
+                sortAlgorithm = new InsertionSort <int>();
+                break;
+             case 3:
+                sortAlgorithm = new QuickSort<int>(new MiddlePivot<int>());
+                break;
+             case 4:
+                sortAlgorithm = new QuickSort<int>(new MedianOfThreePivot<int>());
+                break;
+             case 5:
+                sortAlgorithm = new QuickSort<int>(new RandomPivot<int>());
+                break;
+             case 6:
+                sortAlgorithm = new MergeSort <int>();
+                break;
+             case 7:
+                sortAlgorithm = new ShellSort<int>(new ShellStrategy());
+                break;
+             case 8:
+                sortAlgorithm = new ShellSort<int>(new HibbardStrategy());
+                break;
+             case 9:
+                sortAlgorithm = new ShellSort<int>(new SedgewickStrategy());
+                break;
+             case 10:
+                sortAlgorithm = new ShellSort<int>(new CiuraStrategy());
+                break;
+             default:
+                sortAlgorithm = new BubbleSort <int>();
+          }
+}
+
+void ViewInfo::clearPlot() {
+    // deleting all data on plot
+    for( int g=0; g<plot->graphCount(); g++ )
+        plot->graph(g)->data()->clear();
+    // refresh
+    plot->replot();
+}
+
+void ViewInfo::setPlot(QVector<double> x, QVector<double> y, int depth) {
+    // create graph and assign data to it:
+    plot->addGraph();
+    plot->graph(depth)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(QColor(255, 108, 0, 255)), 9));
+    plot->graph(depth)->setPen(QPen(QColor(255, 108, 0, 255)));
+    plot->graph(depth)->setBrush(QBrush(QColor(255, 108, 0, 25)));
+    plot->graph(depth)->setData(x, y);
+    // set axes ranges, so we see all data:
+    plot->xAxis->setRange(x[0], x[x.size()-1]);
+    plot->yAxis->setRange(y[0], y[y.size()-1]);
+    // refresh
+    plot->replot();
+}
+
+void ViewInfo::addAproximationPlot(QVector<double> x, QVector<double> y, int depth) {
+    // create graph and assign data to it:
+    plot->addGraph();
+    plot->graph(depth)->setPen(QPen(QColor(60, 108, 255, 255)));
+    plot->graph(depth)->setData(x, y);
+    // set axes ranges, so we see all data:
+    plot->xAxis->setRange(x[0], x[x.size()-1]);
+    plot->yAxis->setRange(y[0], y[y.size()-1]);
+    // refresh
+    plot->replot();
+}
+
+void ViewInfo::preparePlot(QString x_axis_name, QString y_axis_name){
+    QColor myWhite(220,220,220);
+    plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+    /* axis */
+    plot->xAxis->setBasePen(QPen(myWhite, 1));
+    plot->yAxis->setBasePen(QPen(myWhite, 1));
+    plot->xAxis->setTickPen(QPen(myWhite, 1));
+    plot->yAxis->setTickPen(QPen(myWhite, 1));
+    plot->xAxis->setSubTickPen(QPen(myWhite, 1));
+    plot->yAxis->setSubTickPen(QPen(myWhite, 1));
+    plot->xAxis->setTickLabelColor(myWhite);
+    plot->yAxis->setTickLabelColor(myWhite);
+    plot->xAxis->setLabelFont(QFont("Segoe UI"));
+    plot->yAxis->setLabelFont(QFont("Segoe UI"));
+    plot->xAxis->setLabelColor(myWhite);
+    plot->yAxis->setLabelColor(myWhite);
+    plot->xAxis->setLabel(x_axis_name);
+    plot->yAxis->setLabel(y_axis_name);
+
+    plot->yAxis->grid()->setSubGridVisible(true);
+    plot->xAxis->grid()->setVisible(true);
+    plot->yAxis->grid()->setPen(QPen(QColor(140, 130, 130), 0, Qt::SolidLine));
+    plot->xAxis->grid()->setPen(QPen(QColor(140, 130, 130), 0, Qt::DotLine));
+    plot->yAxis->grid()->setSubGridPen(QPen(QColor(140, 130, 130), 0, Qt::DotLine));
+
+    /*background*/
+    QLinearGradient plotGradient;
+    plotGradient.setStart(0, 0);
+    plotGradient.setFinalStop(0, 350);
+    plotGradient.setColorAt(0, QColor(90, 80, 80));
+    plotGradient.setColorAt(1, QColor(60, 50, 50));
+    plot->setBackground(plotGradient);
+}
