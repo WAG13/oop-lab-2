@@ -19,7 +19,7 @@ SOURCES += main.cpp \
     Approximation/Approximator.cpp \
     Approximation/LinearApproximator.cpp \
     Approximation/LogarithmicApproximator.cpp \
-    Approximation/NLogNApproximator.cpp \
+    Approximation/XLogXApproximator.cpp \
     Approximation/QuadraticApproximator.cpp \
     Diagnostics/MemoryTrackerHook.cpp \
     mainwindow.cpp \
@@ -32,7 +32,7 @@ HEADERS += mainwindow.h \
     Approximation/Approximator.h \
     Approximation/LinearApproximator.h \
     Approximation/LogarithmicApproximator.h \
-    Approximation/NLogNApproximator.h \
+    Approximation/XLogXApproximator.h \
     Approximation/Point.h \
     Approximation/QuadraticApproximator.h \
     Diagnostics/MemoryTrackerHook.h \
