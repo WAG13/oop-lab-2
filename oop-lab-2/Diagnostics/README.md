@@ -17,6 +17,7 @@ Example usage:
             ->setDataGenerator(dataGen)
             //Add hooks
             ->addDiagnosticsHook(memoryTracker)
+            ->addDiagnosticsHook(...)
             //Run
             ->run();
 
