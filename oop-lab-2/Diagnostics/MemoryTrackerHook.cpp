@@ -1,34 +1,20 @@
 #include "MemoryTrackerHook.h"
 
-#include <QDebug>
+MemoryTrackerHook::MemoryTrackerHook() {}
+MemoryTrackerHook::~MemoryTrackerHook() {}
 
-using namespace std;
-
-
-bool MemoryTrackerHook::trackMemory = false;
-size_t MemoryTrackerHook::currentBytesUsed = 0;
-size_t MemoryTrackerHook::maxBytesUsed = 0;
-
-
-void* operator new(size_t size) {
-    if(MemoryTrackerHook::trackMemory) {
-        MemoryTrackerHook::currentBytesUsed += size;
-        MemoryTrackerHook::maxBytesUsed =
-                max(MemoryTrackerHook::maxBytesUsed, MemoryTrackerHook::currentBytesUsed);
-        //printf("new called, bytes used: %zu\n", test::bytesUsed);
-    }
-
-    void *ptr = malloc(size);
-    if (ptr)
-        return ptr;
-    else
-        throw bad_alloc{};
+void MemoryTrackerHook::beforeRunStart(const std::vector<int>& data) {
+    memoryTracker->reset();
+    memoryTracker->activate();
 }
 
-void operator delete(void* ptr, size_t size) {
-    if(MemoryTrackerHook::trackMemory) {
-        MemoryTrackerHook::currentBytesUsed -= size;
-//        printf("delete called, bytes used: %zu\n", bytesUsed);
-    }
-    free(ptr);
+void MemoryTrackerHook::afterRunEnd(const vector<int>& data) {
+    memoryTracker->deactivate();
+    size_t bytesUsed = memoryTracker->getMaxBytesUsed();
+
+    bytesUsedVector.push_back(Point(data.size(), bytesUsed));
+}
+
+vector<Point> MemoryTrackerHook::getBytesUsed() {
+    return bytesUsedVector;
 }
