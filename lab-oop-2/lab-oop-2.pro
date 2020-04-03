@@ -42,12 +42,13 @@ FORMS += mainwindow.ui
 
 INCLUDEPATH += ./Armadillo/include
 
-win64 {
-    LIBS += -L"$$PWD/Armadillo/examples/lib_win64" \
-        -llapack_win64_MT \
-        -lblas_win64_MT
+win64{
+    LIBS += -L"$$PWD/Armadillo/examples/lib_win64" -llapack_win64_MT -lblas_win64_MT
 }
-unix {
+win32{
+    LIBS += -L"$$PWD/Armadillo/examples/lib_win64" -llapack_win64_MT -lblas_win64_MT
+}
+unix{
     LIBS += -L"$$PWD/Armadillo/include" -llapack -lopenblas
 }
 
@@ -59,3 +60,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     Approximation/README \
     SortingAlgorithms/README.md
+
+
+
