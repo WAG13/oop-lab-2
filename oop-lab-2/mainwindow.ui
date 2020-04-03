@@ -19,6 +19,8 @@
 	color: rgb(240, 240, 240);
 	background-color: rgb(90, 80, 80)
 }
+
+/*BUTTON*/
 QPushButton{
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 166, 0, 255), stop:1 rgba(255, 85, 0, 255));
 border-radius:15px;
@@ -31,54 +33,77 @@ QPushButton:pressed{
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 166, 0, 240), stop:1 rgba(255, 85, 0, 240));
 }
 
+/*COMBOBOX*/
+QComboBox {
+	color: rgb(39, 39, 39);
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 1px 18px 1px 3px;
+    min-width: 6em;
+}
+QComboBox:editable {
+    background: white;
+}
+QComboBox:!editable, QComboBox::drop-down:editable {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+}
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 166, 0, 255), stop:1 rgba(255, 85, 0, 255));
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::drop-down:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 200, 96, 255), stop:1 rgba(255, 128, 65, 255));
+}
+
+
+/*NUMBER PICKER*/
 QSpinBox {
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 166, 0, 50), stop:1 rgba(255, 85, 0, 150));
 }
-
 QSpinBox::up-button {
 	background-color: qlineargradient(spread:pad, x1:0.507, y1:0, x2:0.532, y2:1, stop:0 rgba(255, 166, 0, 255), stop:1 rgba(255, 123, 0, 255));
 }
 QSpinBox::down-button {
 	background-color: qlineargradient(spread:pad, x1:0.507, y1:0, x2:0.532, y2:1, stop:0 rgba(255, 123, 0, 255), stop:1 rgba(255, 85, 0, 255));
 }
-
 QSpinBox::up-button:hover, QSpinBox::down-button:hover {
-    
 	background-color: rgb(255, 170, 85);
 }
-
 QSpinBox::up-button:pressed,QSpinBox::down-button:pressed {
-    
 	background-color: rgb(200, 100, 0);
 }
-/*
-QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off, 
-QSpinBox::down-arrow:disabled, QSpinBox::down-arrow:off{
-	background-color: rgb(150, 134, 134);
-}*/
 
+/*TABS*/
 QTabWidget::pane { /* The tab widget frame */
     border-top: 2px solid rgb(255, 108, 0);
 }
-
 QTabWidget::tab-bar {
     left: 5px; /* move to the right by 5px */
 }
-
-/* Style the tab using the tab sub-control. Note that
-    it reads QTabBar _not_ QTabWidget */
-
 QTabBar::tab {
 	color: rgb(39, 39, 39);
-    background: qlineargradient(spread:pad, x1:0.531925, y1:0.807, x2:0.523, y2:0, stop:0 rgba(187, 187, 187, 255), stop:1 rgba(232, 232, 232, 255));
-    
+    background: qlineargradient(spread:pad, x1:0.531925, y1:0.807, x2:0.523, y2:0, stop:0 rgba(187, 187, 187, 255), stop:1 rgba(232, 232, 232, 255)); 
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     padding: 2px 15px;
 	border:1px solid rgb(90, 80, 80);
 	border-bottom-color: rgb(255, 108, 0); /* same as the pane color */
 }
-
 QTabBar::tab:selected {
 	color: rgb(240, 240, 240);
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 166, 0, 255), stop:1 rgba(255, 85, 0, 255))
@@ -105,19 +130,6 @@ QTabBar::tab:hover {
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QLabel" name="label_6">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>some info here</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QCustomPlot" name="plot_numb_time" native="true"/>
             </item>
            </layout>
@@ -127,19 +139,6 @@ QTabBar::tab:hover {
             <string>Plot (time/memory)</string>
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <widget class="QLabel" name="label_7">
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>blah blah blah</string>
-              </property>
-             </widget>
-            </item>
             <item>
              <widget class="QCustomPlot" name="plot_time_memo" native="true"/>
             </item>
@@ -166,7 +165,7 @@ QTabBar::tab:hover {
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_8">
+               <widget class="QLabel" name="complex">
                 <property name="text">
                  <string>-</string>
                 </property>
@@ -177,7 +176,7 @@ QTabBar::tab:hover {
             <item>
              <widget class="QLabel" name="label_10">
               <property name="text">
-               <string>info:</string>
+               <string>Additional info:</string>
               </property>
              </widget>
             </item>
@@ -224,7 +223,7 @@ margin-bottom:10px;</string>
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Sorting kinds</string>
+           <string>Type of sorting:</string>
           </property>
          </widget>
         </item>
@@ -243,48 +242,7 @@ margin-bottom:10px;</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">QComboBox {
-	color: rgb(39, 39, 39);
-    border: 1px solid gray;
-    border-radius: 3px;
-    padding: 1px 18px 1px 3px;
-    min-width: 6em;
-}
-
-QComboBox:editable {
-    background: white;
-}
-
-QComboBox:!editable, QComboBox::drop-down:editable {
-     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
-                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-}
-
-/* QComboBox gets the &quot;on&quot; state when the popup is open */
-QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
-                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 25px;
-	
-	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 166, 0, 255), stop:1 rgba(255, 85, 0, 255));
-    border-left-width: 1px;
-    border-left-color: darkgray;
-    border-left-style: solid; /* just a single line */
-    border-top-right-radius: 3px; /* same radius as the QComboBox */
-    border-bottom-right-radius: 3px;
-}
-
-QComboBox::drop-down:hover {
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 200, 96, 255), stop:1 rgba(255, 128, 65, 255));
-}
-</string>
+           <string notr="true"/>
           </property>
           <property name="maxVisibleItems">
            <number>11</number>
@@ -349,7 +307,7 @@ QComboBox::drop-down:hover {
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Number of elements</string>
+           <string>Number of elements:</string>
           </property>
          </widget>
         </item>
@@ -474,7 +432,6 @@ QComboBox::drop-down:hover {
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>

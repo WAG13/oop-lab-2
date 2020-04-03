@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,5 +21,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void clearPlot(QCustomPlot *plot);
+    void preparePlot(QCustomPlot *plot, QString x_axis_name, QString y_axis_name);
+    void setPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=0);
+    void addAproximation(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=1);
 };
 #endif // MAINWINDOW_H

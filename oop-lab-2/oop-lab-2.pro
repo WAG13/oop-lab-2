@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
+    mainwindow.cpp \
+    qcustomplot.cpp \
     Approximation/Approximator.cpp \
     Approximation/Functions/Function.cpp \
     Approximation/Functions/LinearFunction.cpp \
@@ -29,12 +31,12 @@ SOURCES += main.cpp \
     Diagnostics/MemoryTracker.cpp \
     Diagnostics/MemoryTrackerHook.cpp \
     Diagnostics/TestBuilder.cpp \
-    Diagnostics/TimeTrackerHook.cpp \
-    mainwindow.cpp \
-    qcustomplot.cpp
+    Diagnostics/TimeTrackerHook.cpp
+
 
 
 HEADERS += mainwindow.h \
+    qcustomplot.h \
     Approximation/Functions/Function.h \
     Approximation/Functions/LinearFunction.h \
     Approximation/Functions/LogarithmicFunction.h \
@@ -46,7 +48,6 @@ HEADERS += mainwindow.h \
     Diagnostics/Random.h \
     Diagnostics/TestBuilder.h \
     Diagnostics/TimeTrackerHook.h \
-    qcustomplot.h \
     Approximation/ApproximationData.h \
     Approximation/Approximator.h \
     Approximation/LinearApproximator.h \
