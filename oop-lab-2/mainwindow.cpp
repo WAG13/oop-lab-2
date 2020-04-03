@@ -38,12 +38,13 @@ void MainWindow::on_pushButton_clicked()
 
     qDebug() << "Sorting" << size << "ints" << endl;
     MemoryTrackerHook::trackMemory = true;
-    MemoryTrackerHook::bytesUsed = 0;
+    MemoryTrackerHook::currentBytesUsed = 0;
+    MemoryTrackerHook::maxBytesUsed = 0;
 
     sortAlgorithm->sort(ints, 0, ints.size() - 1);
 
     MemoryTrackerHook::trackMemory = false;
-    qDebug() << "Bytes used:" << MemoryTrackerHook::bytesUsed << endl;
+    qDebug() << "Max bytes used:" << MemoryTrackerHook::maxBytesUsed << endl;
 
 
 
