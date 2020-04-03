@@ -9,7 +9,7 @@ Point LogarithmicFunction::getPoint(double x)
 
 string LogarithmicFunction::getName()
 {
-    return "y=a*log(x)+b";
+    return "O(nlogn) = " + to_string(koefs[0]) + " * log(x) + " + to_string(koefs[1]);
 }
 
 LogarithmicFunction::LogarithmicFunction(vector<double> koefs):Function(koefs)

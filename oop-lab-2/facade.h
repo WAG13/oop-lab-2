@@ -7,8 +7,12 @@
 #include "qcustomplot.h"
 
 #include "Approximation/Point.h"
+#include "Approximation/LinearApproximator.h"
+#include "Approximation/QuadraticApproximator.h"
+#include "Approximation/XLogXApproximator.h"
 #include "Approximation/LogarithmicApproximator.h"
 #include "Approximation/ApproximationData.h"
+#include "Approximation/Functions/Function.h"
 
 #include "Diagnostics/DataGenerator.h"
 #include "Diagnostics/MemoryTracker.h"
@@ -42,7 +46,7 @@ private:
     void preparePlot(QCustomPlot *plot, QString x_axis_name, QString y_axis_name);
     void setSortingType(int index);
     void runSorting();
-    void runAproximation();
+    Function* getBestApproximation(const vector<Point>& points);
     void clearPlot(QCustomPlot *plot);
     void setPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=0);
     void addAproximationPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=1);

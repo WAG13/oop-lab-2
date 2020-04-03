@@ -9,7 +9,7 @@ Point XLogXFunction::getPoint(double x)
 
 string XLogXFunction::getName()
 {
-    return "y=a*x*log(x)+b";
+    return "O(nlogn) = " + to_string(koefs[0]) + " * x * log(x) + " + to_string(koefs[1]);
 }
 
 XLogXFunction::XLogXFunction(vector<double> koefs):Function(koefs)

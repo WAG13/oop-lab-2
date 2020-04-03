@@ -1,5 +1,7 @@
 #include "LinearFunction.h"
 
+#include <string>
+
 Point LinearFunction::getPoint(double x)
 {
     return Point(x, koefs[0] * x + koefs[1]);
@@ -7,7 +9,7 @@ Point LinearFunction::getPoint(double x)
 
 string LinearFunction::getName()
 {
-    return "y=a*x+b";
+    return "O(n) = " + to_string(koefs[0]) + " * n + " + to_string(koefs[1]);
 }
 
 LinearFunction::LinearFunction(vector<double> koefs):Function(koefs)

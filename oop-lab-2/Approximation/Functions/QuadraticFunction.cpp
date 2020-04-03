@@ -7,7 +7,7 @@ Point QuadraticFunction::getPoint(double x)
 
 string QuadraticFunction::getName()
 {
-    return "y=a*x^2+b*x+c";
+    return "O(n^2) = " + to_string(koefs[0]) + " * x^2 + " + to_string(koefs[1]) + " * x + " + to_string(koefs[2]);
 }
 
 QuadraticFunction::QuadraticFunction(vector<double> koefs):Function(koefs)

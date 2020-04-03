@@ -1,5 +1,7 @@
 #include "facade.h"
 
+#include <algorithm>
+
 Facade::Facade(QCustomPlot *plot1, QCustomPlot *plot2):plot_time(plot1),plot_memo(plot2) {
     preparePlot(plot_time, "number of elements", "time, seconds");
     preparePlot(plot_memo, "number of elements", "memory, bytes");
@@ -101,27 +103,70 @@ void Facade::runSorting(){
     setPlot(plot_time, number, time);
     setPlot(plot_memo, number, memory);
 
-    //runAproximation(plot_memo,);
+    Function* timeFunc = getBestApproximation(durations);
+    cout << "Time function: " << timeFunc->getName() << endl;
+    Function* memoryFunc = getBestApproximation(bytesUsed);
+    cout << "Memory function: " << memoryFunc->getName() << endl;
+
+    double startX = number[0];
+    cout << startX << endl;
+    double endX = number.back();
+    cout << endX << endl;
+
+    double approxStep = (endX - startX) / 10000;
+    cout << approxStep << endl;
+
+    double currentX = startX;
+    QVector<double> approxNumPoints;
+    QVector<double> approxTimePoints;
+    QVector<double> approxMemPoints;
+    for(int i = 0; i < 10000; i++) {
+        approxNumPoints.push_back(currentX);
+
+        approxMemPoints.push_back(memoryFunc->getPoint(currentX).y);
+        approxTimePoints.push_back(timeFunc->getPoint(currentX).y);
+        currentX += approxStep;
+    }
+
+    addAproximationPlot(plot_memo, approxNumPoints, approxMemPoints, 1);
+    addAproximationPlot(plot_time, approxNumPoints, approxTimePoints, 1);
+
 
     delete memoryTracker;
     delete sortAlgorithm;
     delete dataGen;
+    delete timeFunc;
+    delete memoryFunc;
 }
 
-void Facade::runAproximation(){
-    /*//Test 1
-    LogarithmicApproximator logarithmicApproximator;
+Function* Facade::getBestApproximation(const vector<Point>& points) {
 
-    ApproximationData data = logarithmicApproximator.approximate({ Point(4, 2), Point(8, 3), Point(2, 1) });
+    static unique_ptr<Approximator> linearApproximator = make_unique<LinearApproximator>();
+    static unique_ptr<Approximator> logApproximator = make_unique<LogarithmicApproximator>();
+    static unique_ptr<Approximator> quadraticApproximator = make_unique<QuadraticApproximator>();
+    static unique_ptr<Approximator> xlogxApproximator = make_unique<XLogXApproximator>();
 
-    //print koeficients a,b of y=alogx+b
-    for (double koef : data.function->getKoefs()) {
-        qDebug() << koef << " ";
+    static vector<Approximator*> approximators = {
+        linearApproximator.get(),
+        logApproximator.get(),
+        quadraticApproximator.get(),
+        xlogxApproximator.get()
+    };
+
+    vector<ApproximationData> approximationResults;
+    for(const auto& approximator : approximators) {
+        ApproximationData data = approximator->approximate(points);
+        approximationResults.push_back(data);
     }
 
-    qDebug() << endl;
-    qDebug() << data.standartDeviation;
-    */
+    auto bestResult = std::min_element(
+                approximationResults.begin(),
+                approximationResults.end(),
+                [](const ApproximationData& data1, const ApproximationData& data2) {
+                            return data1.standartDeviation < data2.standartDeviation;
+                        });
+
+    return bestResult->function;
 }
 
 void Facade::clearPlot(QCustomPlot *plot) {
