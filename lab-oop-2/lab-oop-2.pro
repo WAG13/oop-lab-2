@@ -21,6 +21,7 @@ SOURCES += main.cpp \
     Approximation/LogarithmicApproximator.cpp \
     Approximation/NLogNApproximator.cpp \
     Approximation/QuadraticApproximator.cpp \
+    Diagnostics/MemoryTrackerHook.cpp \
     mainwindow.cpp
 
 HEADERS += mainwindow.h \
@@ -31,6 +32,7 @@ HEADERS += mainwindow.h \
     Approximation/NLogNApproximator.h \
     Approximation/Point.h \
     Approximation/QuadraticApproximator.h \
+    Diagnostics/MemoryTrackerHook.h \
     SortingAlgorithms/GappingStrategy.h \
     SortingAlgorithms/PivotingStrategy.h \
     SortingAlgorithms/Random.h \

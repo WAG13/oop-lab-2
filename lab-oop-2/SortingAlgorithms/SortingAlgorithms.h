@@ -221,7 +221,7 @@ private:
 public:
 	MergeSort() {}
 
-	MergeSort(const MergeSort<T>* source) : Sorting(source) {}
+    MergeSort(const MergeSort<T>* source) : Sorting<T>(source) {}
 
 	void sort(vector<T> &sample, size_t first, size_t last) const override {
 		sortRecursive(sample, first, last);
