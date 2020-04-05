@@ -2,6 +2,7 @@
 #define XLOGXFUNCTION_H
 
 #include "Function.h"
+#include <QString>
 
 using namespace std;
 

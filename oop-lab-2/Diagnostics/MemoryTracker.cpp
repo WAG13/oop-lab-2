@@ -5,9 +5,9 @@
 using namespace std;
 
 
-bool MemoryTracker::trackMemory = false;
-size_t MemoryTracker::currentBytesUsed = 0;
-size_t MemoryTracker::maxBytesUsed = 0;
+thread_local bool MemoryTracker::trackMemory = false;
+thread_local size_t MemoryTracker::currentBytesUsed = 0;
+thread_local size_t MemoryTracker::maxBytesUsed = 0;
 
 
 shared_ptr<MemoryTracker> MemoryTracker::getInstance() {

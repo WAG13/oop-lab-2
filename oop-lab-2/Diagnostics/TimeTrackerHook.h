@@ -20,7 +20,7 @@ private:
     void afterRunEnd(const std::vector<int>& data) override;
 
     vector<Point> durationVector;
-    chrono::time_point<chrono::high_resolution_clock> startTime;
+    static thread_local chrono::time_point<chrono::high_resolution_clock> startTime;
 };
 
 #endif // TIMETRACKERHOOK_H

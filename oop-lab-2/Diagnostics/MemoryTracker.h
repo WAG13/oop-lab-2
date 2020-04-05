@@ -26,9 +26,9 @@ private:
     //Singleton
     MemoryTracker() {}
 
-    static bool trackMemory;
-    static size_t currentBytesUsed;
-    static size_t maxBytesUsed;
+    static thread_local bool trackMemory;
+    static thread_local size_t currentBytesUsed;
+    static thread_local size_t maxBytesUsed;
 
 
     static void* trackNew(size_t size);

@@ -4,6 +4,8 @@
 #include "SortingAlgorithms/SortingAlgorithms.h"
 #include "Diagnostics/DataGenerator.h"
 #include <vector>
+#include <algorithm>
+#include <thread>
 
 
 class TestBuilder
@@ -40,6 +42,8 @@ public:
     TestBuilder* addDiagnosticsHook(DiagnosticsHook* hook);
 
 private:
+    void runBatch(int batchNumber);
+
     vector<DiagnosticsHook*> hooks;
     DataGenerator<int>* dataGen = nullptr;
     Sorting<int>* sortAlgorithm;
@@ -48,6 +52,7 @@ private:
     size_t stepSize = 10000;
     int stepCount = 50;
 
+    size_t STEPS_PER_BATCH = 10;
 };
 
 #endif // TESTBUILDER_HPP

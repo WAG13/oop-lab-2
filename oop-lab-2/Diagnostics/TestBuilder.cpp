@@ -32,11 +32,13 @@ TestBuilder* TestBuilder::addDiagnosticsHook(TestBuilder::DiagnosticsHook* hook)
     return this;
 }
 
-void TestBuilder::run() {
-    size_t currentSize = startElementCount;
-    sortAlgorithm->setComparator([](int const &left, int const &right) { return left < right; });
+void TestBuilder::runBatch(int batchNumber)
+{
+    size_t currentStep = batchNumber*STEPS_PER_BATCH;
+    size_t currentSize = startElementCount + currentStep*stepSize;
+    size_t stepsToRun = std::min(STEPS_PER_BATCH, stepCount - currentStep);
 
-    for(int i = 0; i < stepCount; i++) {
+    for(int i = 0; i < stepsToRun; i++) {
 
         vector<int> data = dataGen->generateVector(0, 10000, currentSize);
         for(auto* hook : hooks) {
@@ -50,6 +52,30 @@ void TestBuilder::run() {
         }
         currentSize += stepSize;
     }
+}
+
+void TestBuilder::run() {
+    sortAlgorithm->setComparator([](int const &left, int const &right) { return left < right; });
+
+    STEPS_PER_BATCH = 5;
+
+    int totalBatches = stepCount/STEPS_PER_BATCH;
+    if(stepCount % STEPS_PER_BATCH != 0) {
+        totalBatches++;
+    }
+
+    vector<std::thread> workers;
+    for(int i=0;i<totalBatches;i++) {
+        workers.push_back(std::thread(&TestBuilder::runBatch,this,i));
+    }
+
+    for(int i=0;i<totalBatches;i++) {
+        workers[i].join();
+    }
+
+    /*for(int i=0;i<totalBatches;i++) {
+        runBatch(i);
+    }*/
 }
 
 

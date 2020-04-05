@@ -1,5 +1,7 @@
 #include "TimeTrackerHook.h"
 
+thread_local chrono::time_point<chrono::high_resolution_clock> TimeTrackerHook::startTime = chrono::high_resolution_clock::now();
+
 TimeTrackerHook::TimeTrackerHook()
 {
 

@@ -15,6 +15,6 @@ void MemoryTrackerHook::afterRunEnd(const vector<int>& data) {
     bytesUsedVector.push_back(Point(data.size(), bytesUsed));
 }
 
-vector<Point> MemoryTrackerHook::getBytesUsed() {
+vector<Point> MemoryTrackerHook:: getBytesUsed() {
     return bytesUsedVector;
 }

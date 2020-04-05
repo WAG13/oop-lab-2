@@ -2,6 +2,7 @@
 #define LOGARITHMICFUNCTION_H
 
 #include "Function.h"
+#include <QString>
 
 using namespace std;
 
