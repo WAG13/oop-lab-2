@@ -7,7 +7,7 @@ Point ConstantFunction::getPoint(double x)
 
 string ConstantFunction::getName()
 {
-     return "O(1) = " + to_string(koefs[0]);
+     return "O(1) = " + QString::number(koefs[0],'f',8).toStdString();
 }
 
 ConstantFunction::ConstantFunction(vector<double> koefs):Function(koefs)

@@ -9,7 +9,7 @@ Point LogarithmicFunction::getPoint(double x)
 
 string LogarithmicFunction::getName()
 {
-    return "O(nlogn) = " + to_string(koefs[0]) + " * log(x) + " + to_string(koefs[1]);
+    return "O(nlogn) = " + QString::number(koefs[0],'f',8).toStdString() + " * log(x) + " + QString::number(koefs[1],'f',8).toStdString();
 }
 
 LogarithmicFunction::LogarithmicFunction(vector<double> koefs):Function(koefs)

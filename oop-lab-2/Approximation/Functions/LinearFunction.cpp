@@ -9,7 +9,7 @@ Point LinearFunction::getPoint(double x)
 
 string LinearFunction::getName()
 {
-    return "O(n) = " + to_string(koefs[0]) + " * n + " + to_string(koefs[1]);
+    return "O(n) = " + QString::number(koefs[0],'f',8).toStdString() + " * n + " + QString::number(koefs[1],'f',8).toStdString();
 }
 
 LinearFunction::LinearFunction(vector<double> koefs):Function(koefs)
