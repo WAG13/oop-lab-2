@@ -6,6 +6,8 @@
 
 #include "armadillo"
 
+#include <algorithm>
+
 using namespace std;
 using namespace arma;
 // Interface that represents approximators for different functions

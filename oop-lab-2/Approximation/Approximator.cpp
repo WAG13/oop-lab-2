@@ -1,6 +1,6 @@
 #include "Approximator.h"
 
-#define minStDevValue 1e-8;
+const double MIN_ST_DEV_VALUE = 1e-8;
 
 double Approximator::standartDeviation(Point point, Function *function)
 {
@@ -26,7 +26,7 @@ ApproximationData Approximator::approximate(vector<Point> points)
     for (Point point : points) {
         stDev += standartDeviation(point, approximationFunc);
     }
-    stDev += minStDevValue;
+    stDev = std::min(stDev, MIN_ST_DEV_VALUE);
     stDev *= getFunctionCostKoef();
 
     ApproximationData result;
