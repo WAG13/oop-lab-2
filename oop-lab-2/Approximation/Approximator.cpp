@@ -26,7 +26,7 @@ ApproximationData Approximator::approximate(vector<Point> points)
     for (Point point : points) {
         stDev += standartDeviation(point, approximationFunc);
     }
-    stDev = std::min(stDev, MIN_ST_DEV_VALUE);
+    stDev = std::max(stDev, MIN_ST_DEV_VALUE);
     stDev *= getFunctionCostKoef();
 
     ApproximationData result;
