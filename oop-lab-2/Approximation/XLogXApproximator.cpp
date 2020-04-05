@@ -43,7 +43,7 @@ Function *XLogXApproximator::getApproximationFunction(vector<double> koefs)
 
 double XLogXApproximator::getFunctionCostKoef()
 {
-    return 1.1;
+    return 1.4;
 }
 
 XLogXApproximator::XLogXApproximator()
