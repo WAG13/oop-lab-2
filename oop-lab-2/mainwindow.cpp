@@ -41,6 +41,7 @@ void MainWindow::on_saveButton_clicked()
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) return;
         QTextStream out(&file);
         out << "Algorithm: " << ui->alg_type->text()<< "\n";
+        out << "Data order: " << ui->data_order_info->text()<< "\n";
         out << "Number of elements: "<<facade.getNumberElements()<< "\n";
         out << "Steps: "<<facade.getStep()<< "\n";
         out << "Number of sorts: "<<facade.getNumberSorts()<< "\n";
