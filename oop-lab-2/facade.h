@@ -11,6 +11,7 @@
 #include "Approximation/QuadraticApproximator.h"
 #include "Approximation/XLogXApproximator.h"
 #include "Approximation/LogarithmicApproximator.h"
+#include "Approximation/ConstantApproximator.h"
 #include "Approximation/ApproximationData.h"
 #include "Approximation/Functions/Function.h"
 #include "Diagnostics/DataGenerator.h"

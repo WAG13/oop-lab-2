@@ -12,6 +12,7 @@ protected:
 	mat getA(vector<Point> points);
 	mat getB(vector<Point> points);
     Function *getApproximationFunction(vector<double> koefs);
+    double getFunctionCostKoef();
 public:
     XLogXApproximator();
     ~XLogXApproximator();
