@@ -3,7 +3,7 @@
 
 #include "Function.h"
 
-
+#include <QString>
 
 class ConstantFunction : public Function
 {

@@ -3,6 +3,8 @@
 
 #include "Function.h"
 
+#include <QString>
+
 using namespace std;
 
 class QuadraticFunction : public Function
