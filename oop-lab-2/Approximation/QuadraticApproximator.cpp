@@ -67,7 +67,7 @@ Function *QuadraticApproximator::getApproximationFunction(vector<double> koefs)
 
 double QuadraticApproximator::getFunctionCostKoef()
 {
-    return 1.2;
+    return 1.5;
 }
 
 QuadraticApproximator::QuadraticApproximator()
