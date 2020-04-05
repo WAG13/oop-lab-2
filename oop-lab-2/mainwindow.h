@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include "qcustomplot.h"
+#include <QFile>
+#include <QFileDialog>
+#include <QTextStream>
 #include "QDebug"
 #include "facade.h"
 
@@ -33,7 +36,8 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-
+    void on_saveButton_clicked();
+    void setInfo();
 private:
     Ui::MainWindow *ui;
     Facade facade;

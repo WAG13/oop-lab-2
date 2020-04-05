@@ -1,28 +1,69 @@
 #include "facade.h"
-
 #include <algorithm>
-
-Facade::Facade(QCustomPlot *plot1, QCustomPlot *plot2):plot_time(plot1),plot_memo(plot2) {
-    preparePlot(plot_time, "number of elements", "time, seconds");
-    preparePlot(plot_memo, "number of elements", "memory, bytes");
+/*!
+ * \brief Facade::Facade
+ * \param plot_t
+ * \param plot_m
+ */
+Facade::Facade(QCustomPlot *plot_t, QCustomPlot *plot_m) {
+    addPlotTime(plot_t);
+    addPlotMemory(plot_m);
 }
+
+/*!
+ * \brief Facade::~Facade
+ */
+Facade::~Facade(){
+    delete plot_time;
+    delete plot_memo;
+    delete timeFunc;
+    delete memoryFunc;
+}
+
+/*!
+ * \brief Facade::addPlotTime
+ * \param plot
+ */
 void Facade::addPlotTime(QCustomPlot *plot){
     plot_time=plot;
     preparePlot(plot_time, "number of elements", "time, seconds");
 }
+
+/*!
+ * \brief Facade::addPlotMemory
+ * \param plot
+ */
 void Facade::addPlotMemory(QCustomPlot *plot){
     plot_memo=plot;
     preparePlot(plot_memo, "number of elements", "memory, bytes");
 }
 
-void Facade::addInfo(int sort_type, int elem_numb, int step, int sort_numb){
+/*!
+ * \brief Facade::addInfoBox
+ * \param info
+ */
+void Facade::addInfoBox(QTextEdit *info){ this->info = info; }
+
+/*!
+ * \brief Facade::runSimulation
+ * \param sort_type
+ * \param elem_numb
+ * \param step
+ * \param sort_numb
+ */
+void Facade::runSimulation(int sort_type, int elem_numb, int step, int sort_numb){
     this->elem_numb = elem_numb;
     this->step = step;
     this->sort_numb = sort_numb;
     setSortingType(sort_type);
+    info->clear();
     runSorting();
 }
 
+/*!
+ * \brief Facade::setSortingType
+ * \param index
+ */
 void Facade::setSortingType(int index){
     switch ( index )
           {
@@ -64,11 +105,10 @@ void Facade::setSortingType(int index){
           }
 }
 
+/*!
+ * \brief Facade::runSorting
+ */
 void Facade::runSorting(){
-    QVector<double> number;
-    QVector<double> time;
-    QVector<double> memory;
-
     DataGenerator<int>* dataGen = new RandomDataGenerator<int>();
     MemoryTrackerHook* memoryTracker = new MemoryTrackerHook();
     TimeTrackerHook* timeTracker = new TimeTrackerHook();
@@ -84,61 +124,21 @@ void Facade::runSorting(){
             ->addDiagnosticsHook(timeTracker)
             //Run
             ->run();
-
     //Get results of hooks
     vector<Point> bytesUsed = memoryTracker->getBytesUsed();
-    for(const Point& p : bytesUsed) {
-        number.push_back(p.x);
-        memory.push_back(p.y);
-        qDebug() << p.x << " elements: " << p.y << " bytes used" << endl;
-    }
     vector<Point> durations = timeTracker->getDurationsSeconds();
-    for(const Point& p : durations) {
-        time.push_back(p.y);
-        qDebug() << p.x << " elements: " << p.y << " seconds" << endl;
-    }
-
-    clearPlot(plot_time);
-    clearPlot(plot_memo);
-    setPlot(plot_time, number, time);
-    setPlot(plot_memo, number, memory);
-
-    Function* timeFunc = getBestApproximation(durations);
-    cout << "Time function: " << timeFunc->getName() << endl;
-    Function* memoryFunc = getBestApproximation(bytesUsed);
-    cout << "Memory function: " << memoryFunc->getName() << endl;
-
-    double startX = number[0];
-    cout << startX << endl;
-    double endX = number.back();
-    cout << endX << endl;
-
-    double approxStep = (endX - startX) / 10000;
-    cout << approxStep << endl;
-
-    double currentX = startX;
-    QVector<double> approxNumPoints;
-    QVector<double> approxTimePoints;
-    QVector<double> approxMemPoints;
-    for(int i = 0; i < 10000; i++) {
-        approxNumPoints.push_back(currentX);
-
-        approxMemPoints.push_back(memoryFunc->getPoint(currentX).y);
-        approxTimePoints.push_back(timeFunc->getPoint(currentX).y);
-        currentX += approxStep;
-    }
-
-    addAproximationPlot(plot_memo, approxNumPoints, approxMemPoints, 1);
-    addAproximationPlot(plot_time, approxNumPoints, approxTimePoints, 1);
-
-
+    timeFunc = getBestApproximation(durations);
+    memoryFunc = getBestApproximation(bytesUsed);
+    drawPlots(bytesUsed, durations);
     delete memoryTracker;
-    delete sortAlgorithm;
     delete dataGen;
-    delete timeFunc;
-    delete memoryFunc;
 }
 
+/*!
+ * \brief Facade::getBestApproximation
+ * \param points
+ * \return
+ */
 Function* Facade::getBestApproximation(const vector<Point>& points) {
 
     static unique_ptr<Approximator> linearApproximator = make_unique<LinearApproximator>();
@@ -169,7 +169,11 @@ Function* Facade::getBestApproximation(const vector<Point>& points) {
     return bestResult->function;
 }
 
-void Facade::clearPlot(QCustomPlot *plot) {
+/*!
+ * \brief Facade::clearPlot
+ * \param plot
+ */
+void Facade::clearPlot(QCustomPlot *plot){
     // deleting all data on plot
     for( int g=0; g<plot->graphCount(); g++ )
         plot->graph(g)->data()->clear();
@@ -177,7 +181,14 @@ void Facade::clearPlot(QCustomPlot *plot) {
     plot->replot();
 }
 
-void Facade::setPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth) {
+/*!
+ * \brief Facade::addPlot
+ * \param plot
+ * \param x
+ * \param y
+ * \param depth
+ */
+void Facade::addPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth){
     // create graph and assign data to it:
     plot->addGraph();
     plot->graph(depth)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(QColor(255, 108, 0, 255)), 9));
@@ -191,18 +202,31 @@ void Facade::setPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, in
     plot->replot();
 }
 
-void Facade::addAproximationPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth) {
+/*!
+ * \brief Facade::addAproximationPlot
+ * \param plot
+ * \param x
+ * \param y
+ * \param depth
+ */
+void Facade::addAproximationPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth){
     // create graph and assign data to it:
     plot->addGraph();
     plot->graph(depth)->setPen(QPen(QColor(60, 108, 255, 255)));
     plot->graph(depth)->setData(x, y);
     // set axes ranges, so we see all data:
-    plot->xAxis->setRange(x[0], x[x.size()-1]);
-    plot->yAxis->setRange(y[0], y[y.size()-1]);
+    //plot->xAxis->setRange(x[0], x[x.size()-1]);
+    //plot->yAxis->setRange(y[0], y[y.size()-1]);
     // refresh
     plot->replot();
 }
 
+/*!
+ * \brief Facade::preparePlot
+ * \param plot
+ * \param x_axis_name
+ * \param y_axis_name
+ */
 void Facade::preparePlot(QCustomPlot *plot, QString x_axis_name, QString y_axis_name){
     QColor myWhite(220,220,220);
     plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
@@ -235,4 +259,43 @@ void Facade::preparePlot(QCustomPlot *plot, QString x_axis_name, QString y_axis_
     plotGradient.setColorAt(0, QColor(90, 80, 80));
     plotGradient.setColorAt(1, QColor(60, 50, 50));
     plot->setBackground(plotGradient);
+}
+
+/*!
+ * \brief Facade::drawPlots
+ * \param bytesUsed
+ * \param durations
+ */
+void Facade::drawPlots(vector<Point> bytesUsed, vector<Point> durations){
+    QVector<double> number;
+    QVector<double> time;
+    QVector<double> memory;
+    for (unsigned int i=0; i<bytesUsed.size(); i++){
+        number.push_back(bytesUsed[i].x);
+        memory.push_back(bytesUsed[i].y);
+        time.push_back(durations[i].y);
+        QString s = QString::number(number[i])+" elements: "+QString::number(memory[i])+" bytes used, "+QString::number(time[i])+" seconds;";
+        info->append(s);
+    }
+    // adding data to plots
+    clearPlot(plot_time);
+    clearPlot(plot_memo);
+    addPlot(plot_time, number, time);
+    addPlot(plot_memo, number, memory);
+
+    double currentX = number.front();
+    double approxStep = (number.back() - number.front()) / accuracy;
+
+    QVector<double> approxNumPoints;
+    QVector<double> approxTimePoints;
+    QVector<double> approxMemPoints;
+    for(int i = 0; i < accuracy; i++) {
+        approxNumPoints.push_back(currentX);
+        approxTimePoints.push_back(timeFunc->getPoint(currentX).y);
+        approxMemPoints.push_back(memoryFunc->getPoint(currentX).y);
+        currentX += approxStep;
+    }
+    // adding aproximation to plots
+    addAproximationPlot(plot_memo, approxNumPoints, approxMemPoints);
+    addAproximationPlot(plot_time, approxNumPoints, approxTimePoints);
 }

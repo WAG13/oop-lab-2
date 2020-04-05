@@ -112,7 +112,7 @@ public:
 	}
 
 	Sorting<T>* clone() const override {
-		InsertionSort<T>(this);
+        return new InsertionSort<T>(this);
 	}
 
 	~InsertionSort() override {}

@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     facade.addPlotTime(ui->plot_time);
     facade.addPlotMemory(ui->plot_memo);
+    facade.addInfoBox(ui->info);
 }
 
 MainWindow::~MainWindow()
@@ -17,50 +18,33 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
-    facade.addInfo(ui->comboBox->currentIndex(),ui->num_elem->value(),ui->step->value(),ui->num_sorts->value());
-
-    /* Test */
-    //TODO: remove
-/*
-    Sorting<int>* sortAlgorithm = new MergeSort<int>();
-    DataGenerator<int>* dataGen = new RandomDataGenerator<int>();
-
-    MemoryTrackerHook* memoryTracker = new MemoryTrackerHook();
-    TimeTrackerHook* timeTracker = new TimeTrackerHook();
-
-    TestBuilder test;
-    test.setSortAlgorithm(sortAlgorithm)
-            //Add parameters
-            ->setStartElementCount(100)
-            ->setStepSize(10000)
-            ->setStepCount(5)
-            ->setDataGenerator(dataGen)
-            //Add hooks
-            ->addDiagnosticsHook(memoryTracker)
-            ->addDiagnosticsHook(timeTracker)
-            //Run
-            ->run();
-
-    //Get results of hooks
-    vector<Point> bytesUsed = memoryTracker->getBytesUsed();
-    for(const Point& p : bytesUsed) {
-        qDebug() << p.x << " elements: " << p.y << " bytes used" << endl;
-    }
-
-    vector<Point> durations = timeTracker->getDurationsSeconds();
-    for(const Point& p : durations) {
-        qDebug() << p.x << " elements: " << p.y << " seconds" << endl;
-    }
-
-
-    delete memoryTracker;
-    delete sortAlgorithm;
-    delete dataGen;
-    */
-
+    facade.runSimulation(ui->comboBox->currentIndex(),ui->num_elem->value(),ui->step->value(),ui->num_sorts->value());
+    setInfo();
 }
 
+void MainWindow::setInfo(){
+    ui->alg_type->setText(ui->comboBox->currentText());
+    ui->time_func->setText(QString::fromStdString(facade.getTimeFunc()->getName()));
+    ui->memory_func->setText(QString::fromStdString(facade.getMemoryFunc()->getName()));
+}
 
+void MainWindow::on_saveButton_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("Save information about sorting"), "../saves/"+ui->comboBox->currentText(),
+            tr("Text files (*.txt)"));
+        if (fileName.isEmpty()) return;
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) return;
+        QTextStream out(&file);
+        out << "Algorithm: " << ui->alg_type->text()<< "\n";
+        out << "Number of elements: "<<facade.getNumberElements()<< "\n";
+        out << "Steps: "<<facade.getStep()<< "\n";
+        out << "Number of sorts: "<<facade.getNumberSorts()<< "\n";
+        out << "Time function: "<<ui->time_func->text()<<"\n";
+        out << "Memory function: "<<ui->memory_func->text()<<"\n";
+        out << "Additional information: \n";
+        out << ui->info->toPlainText();
+}

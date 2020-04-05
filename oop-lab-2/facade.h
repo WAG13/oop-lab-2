@@ -13,7 +13,6 @@
 #include "Approximation/LogarithmicApproximator.h"
 #include "Approximation/ApproximationData.h"
 #include "Approximation/Functions/Function.h"
-
 #include "Diagnostics/DataGenerator.h"
 #include "Diagnostics/MemoryTracker.h"
 #include "Diagnostics/MemoryTrackerHook.h"
@@ -23,33 +22,44 @@
 #include <vector>
 #include <memory>
 
+/*!
+ * \brief The Facade class
+ */
 class Facade
 {
 public:
     Facade(){}
-    Facade(QCustomPlot *plot1, QCustomPlot *plot2);
-    ~Facade(){delete plot_time; delete plot_memo;}
+    Facade(QCustomPlot *plot_t, QCustomPlot *plot_m);
+    ~Facade();
     void addPlotTime(QCustomPlot *plot);
     void addPlotMemory(QCustomPlot *plot);
-    void addInfo(int sorting_type, int elem_numb, int step, int sort_numb);
-
+    void addInfoBox(QTextEdit *info);
+    void runSimulation(int sorting_type, int elem_numb, int step, int sort_numb);
+    int getNumberElements() const {return elem_numb;}
+    int getNumberSorts() const {return sort_numb;}
+    int getStep() const {return step;}
+    Function* getTimeFunc() const {return timeFunc;}
+    Function* getMemoryFunc() const {return memoryFunc;}
 private:
     QCustomPlot *plot_time;
     QCustomPlot *plot_memo;
-    int sorting_type = 0;
+    QTextEdit *info;
+    const int accuracy = 10000;
     int elem_numb = 0;
-    int step = 0;
     int sort_numb = 0;
+    int step = 0;
     Sorting<int>* sortAlgorithm;
-    QVector<Point> data;
+    Function* timeFunc;
+    Function* memoryFunc;
 
     void preparePlot(QCustomPlot *plot, QString x_axis_name, QString y_axis_name);
     void setSortingType(int index);
     void runSorting();
     Function* getBestApproximation(const vector<Point>& points);
     void clearPlot(QCustomPlot *plot);
-    void setPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=0);
+    void addPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=0);
     void addAproximationPlot(QCustomPlot *plot, QVector<double> x, QVector<double> y, int depth=1);
+    void drawPlots(vector<Point> bytesUsed, vector<Point> durations);
 };
 
 #endif // VIEWINFO_H

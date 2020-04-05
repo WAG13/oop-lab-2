@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1166</width>
-    <height>621</height>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -109,10 +109,41 @@ QTabBar::tab:selected {
 QTabBar::tab:hover {
 	color: rgb(240, 240, 240);
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 200, 96, 255), stop:1 rgba(255, 128, 65, 255));
-}</string>
+}
+/*SCROLL BAR*/
+QScrollBar:vertical {
+     border: none;
+     background: rgb(70, 62, 62);
+     width: 10px;
+     margin: 20px 0;
+ }
+ QScrollBar::handle:vertical {
+     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 170, 0, 255), stop:1 rgba(255, 85, 0, 255));
+border-radius:3px;
+     min-height: 20px;
+ }
+ QScrollBar::add-line:vertical {
+     background: qlineargradient(spread:pad, x1:0.701781, y1:1, x2:0.298, y2:0.0113636, stop:0.00497512 rgba(213, 213, 213, 255), stop:1 rgba(224, 224, 224, 255));
+	border-radius:3px;
+     height: 20px;
+     subcontrol-position: bottom;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar::sub-line:vertical {
+     background: qlineargradient(spread:pad, x1:0.701781, y1:1, x2:0.298, y2:0.0113636, stop:0.00497512 rgba(213, 213, 213, 255), stop:1 rgba(224, 224, 224, 255));
+	border-radius:3px;
+     height: 20px;
+     subcontrol-position: top;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+     background: none;
+ }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -122,6 +153,166 @@ QTabBar::tab:hover {
           <property name="currentIndex">
            <number>0</number>
           </property>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>info</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <layout class="QHBoxLayout" name="infoLayout">
+              <item>
+               <layout class="QFormLayout" name="formLayout">
+                <property name="labelAlignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                </property>
+                <property name="horizontalSpacing">
+                 <number>15</number>
+                </property>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>Time function:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="time_func">
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_15">
+                  <property name="text">
+                   <string>Memory function:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLabel" name="memory_func">
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_13">
+                  <property name="minimumSize">
+                   <size>
+                    <width>140</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>140</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">font: 16pt &quot;Segoe UI&quot;;
+margin-bottom:10px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Algorithm:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="alg_type">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>1000</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">font: 16pt &quot;Segoe UI&quot;;
+margin-bottom:10px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Bubble Sort</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="Line" name="line_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Additional info:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="info">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="overwriteMode">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignTop">
+             <widget class="QPushButton" name="saveButton">
+              <property name="minimumSize">
+               <size>
+                <width>180</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Save to file</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
           <widget class="QWidget" name="tab">
            <attribute name="title">
             <string>Plot (number/time)</string>
@@ -139,55 +330,6 @@ QTabBar::tab:hover {
            <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
              <widget class="QCustomPlot" name="plot_memo" native="true"/>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="tab_3">
-           <attribute name="title">
-            <string>info</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_7">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QLabel" name="label_9">
-                <property name="maximumSize">
-                 <size>
-                  <width>160</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Complexity:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="complex">
-                <property name="text">
-                 <string>-</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>Additional info:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextEdit" name="textEdit">
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
             </item>
            </layout>
           </widget>
@@ -211,7 +353,7 @@ p, li { white-space: pre-wrap; }
 margin-bottom:10px;</string>
           </property>
           <property name="text">
-           <string>Settings</string>
+           <string>Simulation</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -324,7 +466,7 @@ margin-bottom:10px;</string>
            </size>
           </property>
           <property name="maximum">
-           <number>1000000</number>
+           <number>100000000</number>
           </property>
           <property name="value">
            <number>100</number>
@@ -347,7 +489,7 @@ margin-bottom:10px;</string>
            </size>
           </property>
           <property name="maximum">
-           <number>100000</number>
+           <number>1000000</number>
           </property>
           <property name="value">
            <number>50</number>
@@ -376,7 +518,7 @@ margin-bottom:10px;</string>
            <bool>false</bool>
           </property>
           <property name="maximum">
-           <number>300</number>
+           <number>100000</number>
           </property>
           <property name="stepType">
            <enum>QAbstractSpinBox::DefaultStepType</enum>
@@ -406,8 +548,8 @@ margin-bottom:10px;</string>
          <widget class="QPushButton" name="pushButton">
           <property name="minimumSize">
            <size>
-            <width>200</width>
-            <height>40</height>
+            <width>180</width>
+            <height>50</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -417,7 +559,7 @@ margin-bottom:10px;</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">margin-bottom:10px;</string>
           </property>
           <property name="text">
            <string>START</string>

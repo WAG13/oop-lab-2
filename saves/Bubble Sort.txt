@@ -1,0 +1,37 @@
+Algorithm: Bubble Sort
+Number of elements: 100
+Steps: 50
+Number of sorts: 30
+Time function: O(n^2) = 0.000000 * x^2 + -0.000001 * x + 0.000480
+Memory function: O(n) = 0.000000 * n + 0.000000
+Additional information: 
+100 elements: 0 bytes used, 0 seconds;
+150 elements: 0 bytes used, 0 seconds;
+200 elements: 0 bytes used, 0.0010278 seconds;
+250 elements: 0 bytes used, 0 seconds;
+300 elements: 0 bytes used, 0.0009996 seconds;
+350 elements: 0 bytes used, 0.0009947 seconds;
+400 elements: 0 bytes used, 0.0019642 seconds;
+450 elements: 0 bytes used, 0.0010282 seconds;
+500 elements: 0 bytes used, 0.001997 seconds;
+550 elements: 0 bytes used, 0.0019921 seconds;
+600 elements: 0 bytes used, 0.0029944 seconds;
+650 elements: 0 bytes used, 0.0019924 seconds;
+700 elements: 0 bytes used, 0.00399 seconds;
+750 elements: 0 bytes used, 0.0039884 seconds;
+800 elements: 0 bytes used, 0.0039895 seconds;
+850 elements: 0 bytes used, 0.0049889 seconds;
+900 elements: 0 bytes used, 0.0049922 seconds;
+950 elements: 0 bytes used, 0.0059761 seconds;
+1000 elements: 0 bytes used, 0.0059933 seconds;
+1050 elements: 0 bytes used, 0.0069828 seconds;
+1100 elements: 0 bytes used, 0.007979 seconds;
+1150 elements: 0 bytes used, 0.0089731 seconds;
+1200 elements: 0 bytes used, 0.0099754 seconds;
+1250 elements: 0 bytes used, 0.0109708 seconds;
+1300 elements: 0 bytes used, 0.0119349 seconds;
+1350 elements: 0 bytes used, 0.012001 seconds;
+1400 elements: 0 bytes used, 0.0139419 seconds;
+1450 elements: 0 bytes used, 0.0139503 seconds;
+1500 elements: 0 bytes used, 0.0159575 seconds;
+1550 elements: 0 bytes used, 0.0169873 seconds;
