@@ -44,7 +44,12 @@ mat LogarithmicApproximator::getB(vector<Point> points)
 
 Function *LogarithmicApproximator::getApproximationFunction(vector<double> koefs)
 {
-return new LogarithmicFunction(koefs);
+    return new LogarithmicFunction(koefs);
+}
+
+double LogarithmicApproximator::getFunctionCostKoef()
+{
+ return 1.1;
 }
 
 LogarithmicApproximator::~LogarithmicApproximator()

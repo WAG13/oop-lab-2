@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
+    Approximation/ConstantApproximator.cpp \
+    Approximation/Functions/ConstantFunction.cpp \
     facade.cpp \
     mainwindow.cpp \
     qcustomplot.cpp \
@@ -37,6 +39,8 @@ SOURCES += main.cpp \
 
 
 HEADERS += mainwindow.h \
+    Approximation/ConstantApproximator.h \
+    Approximation/Functions/ConstantFunction.h \
     facade.h \
     qcustomplot.h \
     Approximation/Functions/Function.h \

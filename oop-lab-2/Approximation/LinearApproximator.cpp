@@ -42,6 +42,11 @@ Function *LinearApproximator::getApproximationFunction(vector<double> koefs)
     return new LinearFunction(koefs);
 }
 
+double LinearApproximator::getFunctionCostKoef()
+{
+    return 1.1;
+}
+
 LinearApproximator::LinearApproximator()
 {
 }

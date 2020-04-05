@@ -19,6 +19,8 @@ protected:
     virtual Function *getApproximationFunction(vector<double> koefs) = 0;
     virtual mat getA(vector<Point> points) = 0;
     virtual mat getB(vector<Point> points) = 0;
+    //add additional cost to functions that are more polynomic to encourage using less polynomic functions
+    virtual double getFunctionCostKoef() = 0;
 public:
     ApproximationData approximate(vector<Point> points);
 	Approximator();

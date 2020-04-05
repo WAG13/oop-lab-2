@@ -145,12 +145,14 @@ Function* Facade::getBestApproximation(const vector<Point>& points) {
     static unique_ptr<Approximator> logApproximator = make_unique<LogarithmicApproximator>();
     static unique_ptr<Approximator> quadraticApproximator = make_unique<QuadraticApproximator>();
     static unique_ptr<Approximator> xlogxApproximator = make_unique<XLogXApproximator>();
+    static unique_ptr<Approximator> constantApproximator = make_unique<ConstantApproximator>();
 
     static vector<Approximator*> approximators = {
         linearApproximator.get(),
         logApproximator.get(),
         quadraticApproximator.get(),
-        xlogxApproximator.get()
+        xlogxApproximator.get(),
+        constantApproximator.get()
     };
 
     vector<ApproximationData> approximationResults;
