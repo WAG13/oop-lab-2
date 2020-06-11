@@ -20,12 +20,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    facade.runSimulation(ui->comboBox->currentIndex(),ui->num_elem->value(),ui->step->value(),ui->num_sorts->value());
+    facade.runSimulation(ui->algorithm->currentIndex(),ui->data_order->currentIndex(),ui->num_elem->value(),ui->step->value(),ui->num_sorts->value());
     setInfo();
 }
 
 void MainWindow::setInfo(){
-    ui->alg_type->setText(ui->comboBox->currentText());
+    ui->alg_type->setText(ui->algorithm->currentText());
+    ui->data_order_info->setText(ui->data_order->currentText());
     ui->time_func->setText(QString::fromStdString(facade.getTimeFunc()->getName()));
     ui->memory_func->setText(QString::fromStdString(facade.getMemoryFunc()->getName()));
 }
@@ -33,13 +34,14 @@ void MainWindow::setInfo(){
 void MainWindow::on_saveButton_clicked()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
-            tr("Save information about sorting"), "../saves/"+ui->comboBox->currentText(),
+            tr("Save information about sorting"), "../saves/"+ui->algorithm->currentText(),
             tr("Text files (*.txt)"));
         if (fileName.isEmpty()) return;
         QFile file(fileName);
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) return;
         QTextStream out(&file);
         out << "Algorithm: " << ui->alg_type->text()<< "\n";
+        out << "Data order: " << ui->data_order_info->text()<< "\n";
         out << "Number of elements: "<<facade.getNumberElements()<< "\n";
         out << "Steps: "<<facade.getStep()<< "\n";
         out << "Number of sorts: "<<facade.getNumberSorts()<< "\n";

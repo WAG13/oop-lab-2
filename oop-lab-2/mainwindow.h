@@ -2,11 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "qcustomplot.h"
-#include <QFile>
+#include "QDebug"
 #include <QFileDialog>
 #include <QTextStream>
-#include "QDebug"
+#include <QFile>
+#include "qcustomplot.h"
 #include "facade.h"
 
 #include "Approximation/Point.h"

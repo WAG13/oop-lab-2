@@ -51,11 +51,12 @@ void Facade::addInfoBox(QTextEdit *info){ this->info = info; }
  * \param step
  * \param sort_numb
  */
-void Facade::runSimulation(int sort_type, int elem_numb, int step, int sort_numb){
+void Facade::runSimulation(int sort_type, int data_type, int elem_numb, int step, int sort_numb){
     this->elem_numb = elem_numb;
     this->step = step;
     this->sort_numb = sort_numb;
     setSortingType(sort_type);
+    setDataType(data_type);
     info->clear();
     runSorting();
 }
@@ -106,10 +107,28 @@ void Facade::setSortingType(int index){
 }
 
 /*!
+ * \brief Facade::setDataType
+ * \param index
+ */
+void Facade::setDataType(int index){
+    switch ( index )
+          {
+             case 0:
+                dataGen = new RandomDataGenerator<int>();
+                break;
+             case 1:
+                dataGen = new SortedAscendingDataGenerator<int>();
+                break;
+             default:
+                dataGen = new SortedDescendingDataGenerator<int>();
+          }
+}
+
+/*!
  * \brief Facade::runSorting
  */
 void Facade::runSorting(){
-    DataGenerator<int>* dataGen = new RandomDataGenerator<int>();
+
     MemoryTrackerHook* memoryTracker = new MemoryTrackerHook();
     TimeTrackerHook* timeTracker = new TimeTrackerHook();
     TestBuilder test;

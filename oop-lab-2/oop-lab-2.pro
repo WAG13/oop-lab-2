@@ -88,4 +88,7 @@ DISTFILES += \
     Approximation/README \
     SortingAlgorithms/README.md
 
+RESOURCES += \
+    img.qrc
+
 

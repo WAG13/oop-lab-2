@@ -35,7 +35,7 @@ public:
     void addPlotTime(QCustomPlot *plot);
     void addPlotMemory(QCustomPlot *plot);
     void addInfoBox(QTextEdit *info);
-    void runSimulation(int sorting_type, int elem_numb, int step, int sort_numb);
+    void runSimulation(int sorting_type, int data_type, int elem_numb, int step, int sort_numb);
     int getNumberElements() const {return elem_numb;}
     int getNumberSorts() const {return sort_numb;}
     int getStep() const {return step;}
@@ -50,11 +50,13 @@ private:
     int sort_numb = 0;
     int step = 0;
     Sorting<int>* sortAlgorithm;
+    DataGenerator<int>* dataGen;
     Function* timeFunc;
     Function* memoryFunc;
 
     void preparePlot(QCustomPlot *plot, QString x_axis_name, QString y_axis_name);
     void setSortingType(int index);
+    void setDataType(int index);
     void runSorting();
     Function* getBestApproximation(const vector<Point>& points);
     void clearPlot(QCustomPlot *plot);

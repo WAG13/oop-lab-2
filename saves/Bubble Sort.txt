@@ -1,37 +1,38 @@
 Algorithm: Bubble Sort
+Data order: Descending order
 Number of elements: 100
-Steps: 50
+Steps: 500
 Number of sorts: 30
-Time function: O(n^2) = 0.000000 * x^2 + -0.000001 * x + 0.000480
-Memory function: O(n) = 0.000000 * n + 0.000000
+Time function: O(n^2) = 0.00000001 * x^2 + -0.00000012 * x + -0.00000000
+Memory function: O(1) = 0.00000000
 Additional information: 
 100 elements: 0 bytes used, 0 seconds;
-150 elements: 0 bytes used, 0 seconds;
-200 elements: 0 bytes used, 0.0010278 seconds;
-250 elements: 0 bytes used, 0 seconds;
-300 elements: 0 bytes used, 0.0009996 seconds;
-350 elements: 0 bytes used, 0.0009947 seconds;
-400 elements: 0 bytes used, 0.0019642 seconds;
-450 elements: 0 bytes used, 0.0010282 seconds;
-500 elements: 0 bytes used, 0.001997 seconds;
-550 elements: 0 bytes used, 0.0019921 seconds;
-600 elements: 0 bytes used, 0.0029944 seconds;
-650 elements: 0 bytes used, 0.0019924 seconds;
-700 elements: 0 bytes used, 0.00399 seconds;
-750 elements: 0 bytes used, 0.0039884 seconds;
-800 elements: 0 bytes used, 0.0039895 seconds;
-850 elements: 0 bytes used, 0.0049889 seconds;
-900 elements: 0 bytes used, 0.0049922 seconds;
-950 elements: 0 bytes used, 0.0059761 seconds;
-1000 elements: 0 bytes used, 0.0059933 seconds;
-1050 elements: 0 bytes used, 0.0069828 seconds;
-1100 elements: 0 bytes used, 0.007979 seconds;
-1150 elements: 0 bytes used, 0.0089731 seconds;
-1200 elements: 0 bytes used, 0.0099754 seconds;
-1250 elements: 0 bytes used, 0.0109708 seconds;
-1300 elements: 0 bytes used, 0.0119349 seconds;
-1350 elements: 0 bytes used, 0.012001 seconds;
-1400 elements: 0 bytes used, 0.0139419 seconds;
-1450 elements: 0 bytes used, 0.0139503 seconds;
-1500 elements: 0 bytes used, 0.0159575 seconds;
-1550 elements: 0 bytes used, 0.0169873 seconds;
+600 elements: 0 bytes used, 0.0050123 seconds;
+1100 elements: 0 bytes used, 0.0089773 seconds;
+1600 elements: 0 bytes used, 0.0179519 seconds;
+2100 elements: 0 bytes used, 0.0319147 seconds;
+2600 elements: 0 bytes used, 0.0489033 seconds;
+3100 elements: 0 bytes used, 0.0707798 seconds;
+3600 elements: 0 bytes used, 0.0947527 seconds;
+4100 elements: 0 bytes used, 0.122671 seconds;
+4600 elements: 0 bytes used, 0.154588 seconds;
+5100 elements: 0 bytes used, 0.190491 seconds;
+5600 elements: 0 bytes used, 0.229386 seconds;
+6100 elements: 0 bytes used, 0.272272 seconds;
+6600 elements: 0 bytes used, 0.318184 seconds;
+7100 elements: 0 bytes used, 0.370013 seconds;
+7600 elements: 0 bytes used, 0.421874 seconds;
+8100 elements: 0 bytes used, 0.479719 seconds;
+8600 elements: 0 bytes used, 0.552521 seconds;
+9100 elements: 0 bytes used, 0.604954 seconds;
+9600 elements: 0 bytes used, 0.674614 seconds;
+10100 elements: 0 bytes used, 0.746002 seconds;
+10600 elements: 0 bytes used, 0.833834 seconds;
+11100 elements: 0 bytes used, 0.901196 seconds;
+11600 elements: 0 bytes used, 0.98636 seconds;
+12100 elements: 0 bytes used, 1.07313 seconds;
+12600 elements: 0 bytes used, 1.16688 seconds;
+13100 elements: 0 bytes used, 1.25863 seconds;
+13600 elements: 0 bytes used, 1.35547 seconds;
+14100 elements: 0 bytes used, 1.46308 seconds;
+14600 elements: 0 bytes used, 1.56489 seconds;
