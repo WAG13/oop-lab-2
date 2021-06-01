@@ -4,3 +4,6 @@
 build-oop-lab-2-*
 build-lab-oop-2-*
 
+oop-lab-2/Armadillo/
+.vs/
+oop-lab-2/Armadillo/examples/Makefile
